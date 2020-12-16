@@ -36,7 +36,8 @@ namespace MiniRPGLikeTESO
         Sword steelSword = new Sword("Стальной мечь", 90, 2);
         Cuirass steelCuirass = new Cuirass("Стальная кираса", 23, 23);
         List<HistoryFight> historyFightsList = new List<HistoryFight>();
-        
+        string path = @"Player.txt";
+
         void Status()
         {
             progressBar1.Value = Convert.ToInt32(enemy.Health);
@@ -98,18 +99,41 @@ namespace MiniRPGLikeTESO
         private void History()
         {
             historyFightsList.Add(new HistoryFight(historyFightsList.Count, player, Enemy.Copy(enemy), HeavyEnemy.Copy(heavyEnemy), EasyEnemy.Copy(easyEnemy)));
-            string writePath = @"Player.txt";
-            var jsonStr = JsonConvert.SerializeObject(historyFightsList);
-            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+            
+            using (StreamWriter file = new StreamWriter(path, false, System.Text.Encoding.Default))
             {
-                sw.WriteLine(jsonStr);
+                string a = JsonConvert.SerializeObject(historyFightsList);
+                file.WriteLine(a);
             }
+        }
+        private void goBackHistory()
+        {
+            using (StreamReader file = new StreamReader(path))
+            {
+                var historiList = JsonConvert.DeserializeObject<List<HistoryFight>>(file.ReadToEnd());
+                player = historiList[historiList.Count-2].Player;
+                enemy = historiList[historiList.Count-2].Enemy;
+                heavyEnemy = historiList[historiList.Count-2].HeavyEnemy;
+                easyEnemy = historiList[historiList.Count-2].EasyEnemy;
+            }
+            Status();
+            History();
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
             HistoriForm HistoryForm = new HistoriForm();
             HistoryForm.Show();
+        }
+
+        private void Change_Weapon_Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            goBackHistory();
         }
     }
 }

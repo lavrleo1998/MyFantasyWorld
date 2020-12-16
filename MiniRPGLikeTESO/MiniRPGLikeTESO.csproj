@@ -65,6 +65,7 @@
     <Compile Include="NPCСlasses\Enemy.cs" />
     <Compile Include="NPCСlasses\HeavyEnemy.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="ReadWrite.cs" />
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>
     </Compile>

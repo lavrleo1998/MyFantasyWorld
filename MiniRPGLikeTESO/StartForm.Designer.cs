@@ -40,6 +40,7 @@ namespace MiniRPGLikeTESO
             this.progressBar5 = new System.Windows.Forms.ProgressBar();
             this.progressBar6 = new System.Windows.Forms.ProgressBar();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -89,6 +90,7 @@ namespace MiniRPGLikeTESO
             this.button1.TabIndex = 3;
             this.button1.Text = "Сменить оружие";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Change_Weapon_Button1_Click);
             // 
             // progressBar1
             // 
@@ -144,6 +146,16 @@ namespace MiniRPGLikeTESO
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(866, 594);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(127, 38);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "Отменить последнее действие";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,6 +163,7 @@ namespace MiniRPGLikeTESO
             this.BackgroundImage = global::MiniRPGLikeTESO.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1018, 644);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.progressBar6);
             this.Controls.Add(this.progressBar5);
@@ -185,6 +198,7 @@ namespace MiniRPGLikeTESO
         private System.Windows.Forms.ProgressBar progressBar5;
         private System.Windows.Forms.ProgressBar progressBar6;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
