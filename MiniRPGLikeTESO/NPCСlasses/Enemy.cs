@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MiniRPGLikeTESO.NPCСlasses
 {
-    class Enemy : AbstractCreature
+    public class Enemy : AbstractCreature
     {
         public Enemy()
         {
@@ -15,6 +15,17 @@ namespace MiniRPGLikeTESO.NPCСlasses
             this.Mana = 140;
             this.Damage = 20;
             this.Armor = 20;
+        }
+
+        public static Enemy Copy(Enemy enemy)
+        {
+            var result = new Enemy();
+            result.Health = enemy.Health;
+            result.Stamina = enemy.Stamina;
+            result.Mana = enemy.Mana;
+            result.Damage = enemy.Damage;
+            result.Armor = enemy.Armor;
+            return result;
         }
 
         public override void BeAttacked(double damage, double armor)

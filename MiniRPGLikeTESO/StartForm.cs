@@ -26,7 +26,7 @@ namespace MiniRPGLikeTESO
             progressBar4.Maximum = Convert.ToInt32(player.Mana);
             progressBar5.Maximum = Convert.ToInt32(player.Health);
             progressBar6.Maximum = Convert.ToInt32(player.Stamina);
-            status();
+            Status();
         }
 
         Player player = new Player();
@@ -35,9 +35,9 @@ namespace MiniRPGLikeTESO
         EasyEnemy easyEnemy = new EasyEnemy();
         Sword steelSword = new Sword("Стальной мечь", 90, 2);
         Cuirass steelCuirass = new Cuirass("Стальная кираса", 23, 23);
-
-
-        void status()
+        List<HistoryFight> historyFightsList = new List<HistoryFight>();
+        
+        void Status()
         {
             progressBar1.Value = Convert.ToInt32(enemy.Health);
             progressBar2.Value = Convert.ToInt32(easyEnemy.Health);
@@ -46,15 +46,7 @@ namespace MiniRPGLikeTESO
             progressBar5.Value = Convert.ToInt32(player.Health);
             progressBar6.Value = Convert.ToInt32(player.Stamina);
         }
-        void check()
-        {
-            if (heavyEnemy.Health == 0 & easyEnemy.Health == 0 & enemy.Health == 0)
-            {
-                pictureBox1.Enabled = true;
-                pictureBox2.Enabled = true;
-                pictureBox3.Enabled = true;
-            }
-        }
+
 
         void Attack(string attackedCreature)
         {
@@ -74,15 +66,15 @@ namespace MiniRPGLikeTESO
                 easyEnemy.BeAttacked(player.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
                 if (easyEnemy.Health < 0) easyEnemy.Health = 0;
             }
-
             if (attackedCreature == "player")
             {
                 player.BeAttacked(heavyEnemy.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
                 player.BeAttacked(enemy.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
                 player.BeAttacked(easyEnemy.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
             }
-            status();
-            check();
+
+            Status();
+            History();
         }
 
 
@@ -90,30 +82,34 @@ namespace MiniRPGLikeTESO
         {
             Attack("heavyEnemy");
         }
-
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             Attack("enemy");
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Attack("easyEnemy");
         }
-
         private void NPCAttack()
         {
             Attack("player");
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private void History()
         {
-            var jsonStr = JsonConvert.SerializeObject(player);
-            using (FileStream fstream = new FileStream("Player.txt", FileMode.Create))
+            historyFightsList.Add(new HistoryFight(historyFightsList.Count, player, Enemy.Copy(enemy), HeavyEnemy.Copy(heavyEnemy), EasyEnemy.Copy(easyEnemy)));
+            string writePath = @"Player.txt";
+            var jsonStr = JsonConvert.SerializeObject(historyFightsList);
+            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
             {
-                byte[] array = System.Text.Encoding.Default.GetBytes(jsonStr);
-                await fstream.WriteAsync(array, 0, array.Length);
+                sw.WriteLine(jsonStr);
             }
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            HistoriForm HistoryForm = new HistoriForm();
+            HistoryForm.Show();
         }
     }
 }

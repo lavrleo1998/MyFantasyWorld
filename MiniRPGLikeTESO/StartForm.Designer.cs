@@ -50,9 +50,9 @@ namespace MiniRPGLikeTESO
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImage = global::MiniRPGLikeTESO.Properties.Resources.HE;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(61, 166);
+            this.pictureBox1.Location = new System.Drawing.Point(74, 279);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(188, 247);
+            this.pictureBox1.Size = new System.Drawing.Size(248, 290);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -62,7 +62,7 @@ namespace MiniRPGLikeTESO
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImage = global::MiniRPGLikeTESO.Properties.Resources.EE;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(335, 233);
+            this.pictureBox2.Location = new System.Drawing.Point(454, 359);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(85, 132);
             this.pictureBox2.TabIndex = 1;
@@ -74,7 +74,7 @@ namespace MiniRPGLikeTESO
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = global::MiniRPGLikeTESO.Properties.Resources.E;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.Location = new System.Drawing.Point(426, 233);
+            this.pictureBox3.Location = new System.Drawing.Point(705, 342);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(120, 202);
             this.pictureBox3.TabIndex = 2;
@@ -83,7 +83,7 @@ namespace MiniRPGLikeTESO
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(113, 448);
+            this.button1.Location = new System.Drawing.Point(201, 609);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 23);
             this.button1.TabIndex = 3;
@@ -92,14 +92,15 @@ namespace MiniRPGLikeTESO
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(426, 216);
+            this.progressBar1.BackColor = System.Drawing.Color.Black;
+            this.progressBar1.Location = new System.Drawing.Point(705, 325);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(120, 11);
             this.progressBar1.TabIndex = 4;
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(335, 216);
+            this.progressBar2.Location = new System.Drawing.Point(454, 342);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(85, 11);
             this.progressBar2.TabIndex = 5;
@@ -107,41 +108,41 @@ namespace MiniRPGLikeTESO
             // progressBar3
             // 
             this.progressBar3.ForeColor = System.Drawing.Color.Red;
-            this.progressBar3.Location = new System.Drawing.Point(61, 147);
+            this.progressBar3.Location = new System.Drawing.Point(74, 258);
             this.progressBar3.Name = "progressBar3";
-            this.progressBar3.Size = new System.Drawing.Size(188, 13);
+            this.progressBar3.Size = new System.Drawing.Size(248, 15);
             this.progressBar3.TabIndex = 6;
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(232, 448);
+            this.progressBar4.Location = new System.Drawing.Point(320, 609);
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(100, 23);
             this.progressBar4.TabIndex = 7;
             // 
             // progressBar5
             // 
-            this.progressBar5.Location = new System.Drawing.Point(354, 448);
+            this.progressBar5.Location = new System.Drawing.Point(442, 609);
             this.progressBar5.Name = "progressBar5";
             this.progressBar5.Size = new System.Drawing.Size(100, 23);
             this.progressBar5.TabIndex = 8;
             // 
             // progressBar6
             // 
-            this.progressBar6.Location = new System.Drawing.Point(477, 448);
+            this.progressBar6.Location = new System.Drawing.Point(565, 609);
             this.progressBar6.Name = "progressBar6";
             this.progressBar6.Size = new System.Drawing.Size(100, 23);
             this.progressBar6.TabIndex = 9;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(696, 448);
+            this.button2.Location = new System.Drawing.Point(723, 594);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(136, 38);
             this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
+            this.button2.Text = "Посмотреть историю Боя";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // StartForm
             // 
@@ -149,7 +150,7 @@ namespace MiniRPGLikeTESO
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MiniRPGLikeTESO.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(783, 483);
+            this.ClientSize = new System.Drawing.Size(1018, 644);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.progressBar6);
             this.Controls.Add(this.progressBar5);
@@ -162,6 +163,7 @@ namespace MiniRPGLikeTESO
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Name = "StartForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
