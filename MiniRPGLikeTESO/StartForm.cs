@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MiniRPGLikeTESO.Storages;
 
 namespace MiniRPGLikeTESO
 {
@@ -36,47 +37,64 @@ namespace MiniRPGLikeTESO
         Sword steelSword = new Sword("Стальной мечь", 90, 2);
         Cuirass steelCuirass = new Cuirass("Стальная кираса", 23, 23);
         List<HistoryFight> historyFightsList = new List<HistoryFight>();
-        string path = @"Player.txt";
-
-        void Status()
-        {
-            progressBar1.Value = Convert.ToInt32(enemy.Health);
-            progressBar2.Value = Convert.ToInt32(easyEnemy.Health);
-            progressBar3.Value = Convert.ToInt32(heavyEnemy.Health);
-            progressBar4.Value = Convert.ToInt32(player.Mana);
-            progressBar5.Value = Convert.ToInt32(player.Health);
-            progressBar6.Value = Convert.ToInt32(player.Stamina);
-        }
-
-
+                
         void Attack(string attackedCreature)
         {
             //Надо заменить магические значения на нормальные. Добавь функцию присвоения предмета персонажу через инвентарь
             if (attackedCreature == "heavyEnemy")
             {
                 heavyEnemy.BeAttacked(player.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
-                if (heavyEnemy.Health < 0) heavyEnemy.Health = 0;
+                if (heavyEnemy.Health <= 0)
+                {
+                    heavyEnemy.Health = 0;
+                    History("heavyEnemy");
+                }
             }
             if (attackedCreature == "enemy")
             {
                 enemy.BeAttacked(player.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
-                if (enemy.Health < 0) enemy.Health = 0;
+                if (enemy.Health <= 0)
+                {
+                    enemy.Health = 0;
+                    History("enemy");
+                }
             }
             if (attackedCreature == "easyEnemy")
             {
                 easyEnemy.BeAttacked(player.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
-                if (easyEnemy.Health < 0) easyEnemy.Health = 0;
+                if (easyEnemy.Health <= 0)
+                {
+                    easyEnemy.Health = 0;
+                    History("easyEnemy");
+                }
             }
             if (attackedCreature == "player")
             {
                 player.BeAttacked(heavyEnemy.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
                 player.BeAttacked(enemy.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
                 player.BeAttacked(easyEnemy.WeaponAttack(steelSword.Damage), steelCuirass.Protection);
+                if (player.Health <= 0)
+                {
+                    player.Health = 0;
+                    History("player");
+                }
             }
-
+            
             Status();
-            History();
         }
+        void History(string who)
+        {
+            var history = new HistoryFight()
+            {
+                IdBattle = 1,
+                Time = DateTime.Now,
+                Who = who
+            };
+            Storage.Save(history);
+        }
+
+
+
 
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -95,45 +113,19 @@ namespace MiniRPGLikeTESO
         {
             Attack("player");
         }
-
-        private void History()
-        {
-            historyFightsList.Add(new HistoryFight(historyFightsList.Count, player, Enemy.Copy(enemy), HeavyEnemy.Copy(heavyEnemy), EasyEnemy.Copy(easyEnemy)));
-            
-            using (StreamWriter file = new StreamWriter(path, false, System.Text.Encoding.Default))
-            {
-                string a = JsonConvert.SerializeObject(historyFightsList);
-                file.WriteLine(a);
-            }
-        }
-        private void goBackHistory()
-        {
-            using (StreamReader file = new StreamReader(path))
-            {
-                var historiList = JsonConvert.DeserializeObject<List<HistoryFight>>(file.ReadToEnd());
-                player = historiList[historiList.Count-2].Player;
-                enemy = historiList[historiList.Count-2].Enemy;
-                heavyEnemy = historiList[historiList.Count-2].HeavyEnemy;
-                easyEnemy = historiList[historiList.Count-2].EasyEnemy;
-            }
-            Status();
-            History();
-        }
-
         private void Button2_Click(object sender, EventArgs e)
         {
             HistoriForm HistoryForm = new HistoriForm();
             HistoryForm.Show();
         }
-
-        private void Change_Weapon_Button1_Click(object sender, EventArgs e)
+        void Status()
         {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            goBackHistory();
+            progressBar1.Value = Convert.ToInt32(enemy.Health);
+            progressBar2.Value = Convert.ToInt32(easyEnemy.Health);
+            progressBar3.Value = Convert.ToInt32(heavyEnemy.Health);
+            progressBar4.Value = Convert.ToInt32(player.Mana);
+            progressBar5.Value = Convert.ToInt32(player.Health);
+            progressBar6.Value = Convert.ToInt32(player.Stamina);
         }
     }
 }

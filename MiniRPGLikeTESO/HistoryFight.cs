@@ -9,20 +9,15 @@ namespace MiniRPGLikeTESO
 {
     public class HistoryFight
     {
-        public long Id { get; set; }
-        public Player Player { get; set; }
-        public Enemy Enemy { get; set; }
-        public HeavyEnemy HeavyEnemy { get; set; }
-        public EasyEnemy EasyEnemy { get; set; }
-
+        public long IdBattle { get; set; }
+        public string Who { get; set; } 
+        public DateTime Time { get; set; }
         public HistoryFight() { }
-        public HistoryFight(long id, Player player, Enemy enemy, HeavyEnemy heavyEnemy, EasyEnemy esyEnemy)
+        public HistoryFight(long idBattle, string who, DateTime time)
         {
-            Id = id;
-            Player = player;
-            Enemy = enemy;
-            HeavyEnemy = heavyEnemy;
-            EasyEnemy = esyEnemy;
+            IdBattle = idBattle;
+            Who = who;
+            Time = time;
         }
     }
 }
